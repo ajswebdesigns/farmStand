@@ -7,6 +7,9 @@
 </ul>
 <a class="btn btn-primary" href="/" role="button">All Products</a>
 <a class="btn btn-primary" href="/products/<%= product._id %>/edit" role="button">Edit Product</a>
+<form action="/products/<%= product._id %>?_method=DELETE" method="post">
+  <button class="btn btn-danger mt-2">Delete</button>
+</form>
 
 </div>
 <%- include("footer"); -%>

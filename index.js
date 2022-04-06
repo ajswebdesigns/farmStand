@@ -42,7 +42,6 @@ app.post('/products',async (req, res)=>{
 app.get('/products/:id', async (req, res)=>{
   const {id} = req.params;
   const product =  await Product.findById(id);
-  console.log(product);
   res.render('products/show',{product});
 })
 
@@ -55,14 +54,21 @@ app.get('/products/:id/edit', async (req, res)=>{
 
 app.put('/products/:id', async(req, res)=>{
    const {id} = req.params;
-   const product = await Product.findByIdAndUpdate(id, req.body, {runValidators:true, new: true})
+   const product = await Product.findByIdAndUpdate(id, req.body, {runValidators:true, new: true});
    res.redirect(`/products/${product.id}`);
+})
+
+// Delete Route:
+app.delete('/products/:id', async(req, res)=>{
+   const {id} = req.params;
+   const deletedProduct = await Product.findByIdAndDelete(id);
+   console.log(`${deletedProduct}, has been removed`);
+   res.redirect('/')
 })
 
 app.listen(port, ()=>{
   console.log(`App is listening on ${port}`);
 })
-
 
 
 // old way of doing things async is better
